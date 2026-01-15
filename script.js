@@ -20,15 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
    ======================================== */
 function initTheme() {
     const themeToggle = document.querySelector('.theme-toggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Check for saved theme preference or use system preference
+    // Check for saved theme preference, default to dark mode
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         document.documentElement.setAttribute('data-theme', savedTheme);
-    } else if (!prefersDark.matches) {
-        document.documentElement.setAttribute('data-theme', 'light');
     }
+    // Dark mode is the default (no attribute needed since :root styles are dark)
 
     // Toggle theme on button click
     if (themeToggle) {
@@ -41,12 +39,6 @@ function initTheme() {
         });
     }
 
-    // Listen for system theme changes
-    prefersDark.addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
-    });
 }
 
 /* ========================================
@@ -195,27 +187,31 @@ function initFormHandling() {
 
         // Get form data
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
+        const name = formData.get('name') || '';
+        const email = formData.get('email') || '';
+        const message = formData.get('message') || '';
 
-        // Here you would typically send the data to a server
-        // For now, we'll just show a success message
-        console.log('Form submitted:', data);
+        // Build mailto link
+        const subject = encodeURIComponent(`Website Inquiry from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+        const mailtoLink = `mailto:j2webdevsolutions@gmail.com?subject=${subject}&body=${body}`;
 
-        // Show success feedback
+        // Open default email client
+        window.location.href = mailtoLink;
+
+        // Show feedback
         const submitBtn = form.querySelector('.form-submit');
         const originalText = submitBtn.textContent;
 
-        submitBtn.textContent = 'Message Sent!';
+        submitBtn.textContent = 'Opening Email...';
         submitBtn.style.backgroundColor = '#22c55e';
 
-        // Reset form
-        form.reset();
-
-        // Reset button after delay
+        // Reset form and button after delay
         setTimeout(() => {
+            form.reset();
             submitBtn.textContent = originalText;
             submitBtn.style.backgroundColor = '';
-        }, 3000);
+        }, 2000);
     });
 }
 
@@ -244,6 +240,7 @@ function initHeroParallax() {
     const hero = document.querySelector('.hero');
     const shapes = document.querySelectorAll('.hero-shapes .shape');
     const gridPattern = document.querySelector('.grid-pattern');
+    const logoWatermark = document.querySelector('.hero-logo-bg');
 
     if (!hero || shapes.length === 0) return;
 
@@ -286,6 +283,13 @@ function initHeroParallax() {
                 shape.style.transform = `translate(${x}px, ${y}px)`;
             }
         });
+
+        // Move J² logo with the blobs (slower for depth effect)
+        if (logoWatermark) {
+            const logoX = currentX * 25;
+            const logoY = currentY * 25;
+            logoWatermark.style.transform = `translate(calc(-50% + ${logoX}px), calc(-50% + ${logoY}px))`;
+        }
 
         // Move grid pattern subtly
         if (gridPattern) {
@@ -345,6 +349,7 @@ function initPhysicsShapes() {
             vy: Math.sin(angle) * speed,
             size: size,
             isDragging: false,
+            canDrag: true,
             rotation: rotation,
             rotationSpeed: rotationSpeed
         });
