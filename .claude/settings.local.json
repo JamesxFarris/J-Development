@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git fetch:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "WebFetch(domain:creativeapes.design)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd J² Development website\n\n- Modern dark/light theme with toggle\n- Hero section with animated geometric shapes\n- About, Work, Services, FAQ, and Contact sections\n- Placeholder portfolio projects\n- Responsive design with mobile menu\n- Smooth scroll animations\n- SVG favicon\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
+    ]
+  }
+}

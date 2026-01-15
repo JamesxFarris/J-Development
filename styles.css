@@ -9,7 +9,8 @@
     --color-text: #ffffff;
     --color-text-secondary: #a0a0a0;
     --color-text-muted: #666666;
-    --color-accent: #ffffff;
+    --color-accent: #7c5cbf;
+    --color-accent-hover: #9171d1;
     --color-border: #222222;
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-serif: 'Playfair Display', Georgia, serif;
@@ -24,7 +25,8 @@
     --color-text: #000000;
     --color-text-secondary: #555555;
     --color-text-muted: #888888;
-    --color-accent: #000000;
+    --color-accent: #5C3E94;
+    --color-accent-hover: #7a52c4;
     --color-border: #e0e0e0;
 }
 
@@ -142,6 +144,13 @@ button {
     font-weight: 700;
     letter-spacing: -0.02em;
     transition: opacity 0.3s var(--transition-smooth);
+    margin-left: 20px;
+}
+
+@media (min-width: 768px) {
+    .logo {
+        margin-left: 40px;
+    }
 }
 
 .logo:hover {
@@ -239,8 +248,9 @@ button {
 }
 
 .theme-toggle:hover {
-    background-color: var(--color-text);
-    color: var(--color-bg);
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #ffffff;
 }
 
 .theme-toggle svg {
@@ -330,20 +340,20 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 120px 24px 80px;
+    padding: 80px 24px 100px;
     position: relative;
     overflow: hidden;
 }
 
 @media (min-width: 768px) {
     .hero {
-        padding: 120px 48px 80px;
+        padding: 80px 48px 100px;
     }
 }
 
 @media (min-width: 1200px) {
     .hero {
-        padding: 120px 80px 80px;
+        padding: 80px 80px 100px;
     }
 }
 
@@ -354,6 +364,13 @@ button {
     max-width: 1400px;
     width: 100%;
     overflow: visible;
+    margin-top: -40px;
+}
+
+@media (min-width: 768px) {
+    .hero-inner {
+        margin-top: -60px;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -399,7 +416,8 @@ button {
     position: absolute;
     border-radius: 50%;
     opacity: 0;
-    animation: shapeFloat 6s ease-in-out infinite, shapeFadeIn 1s ease forwards;
+    animation: shapeFadeIn 1s ease forwards;
+    will-change: transform;
 }
 
 .shape-1 {
@@ -410,7 +428,7 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     animation-delay: 0s;
-    filter: blur(60px);
+    filter: blur(30px);
 }
 
 .shape-2 {
@@ -420,7 +438,7 @@ button {
     top: 5%;
     right: 0%;
     animation-delay: 0.2s;
-    filter: blur(50px);
+    filter: blur(25px);
 }
 
 .shape-3 {
@@ -430,55 +448,172 @@ button {
     bottom: 5%;
     left: 0%;
     animation-delay: 0.4s;
-    filter: blur(45px);
+    filter: blur(22px);
 }
 
 .shape-4 {
-    width: 140px;
-    height: 140px;
-    border: 2px solid var(--color-border);
-    background: transparent;
-    top: 15%;
-    left: 15%;
-    border-radius: 24px;
-    animation-delay: 0.6s;
-    filter: none;
-    animation: shapeRotate 20s linear infinite, shapeFadeIn 1s ease 0.6s forwards;
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.25) 0%, rgba(245, 158, 11, 0.25) 100%);
+    top: 10%;
+    right: 15%;
+    filter: blur(35px);
+    animation: shapeFadeIn 1s ease 0.6s forwards;
 }
 
 .shape-5 {
-    width: 180px;
-    height: 180px;
-    border: 2px solid var(--color-border);
-    background: transparent;
-    bottom: 15%;
-    right: 10%;
-    animation-delay: 0.8s;
-    filter: none;
-    animation: shapeRotateReverse 25s linear infinite, shapeFadeIn 1s ease 0.8s forwards;
+    width: 220px;
+    height: 220px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(59, 130, 246, 0.25) 100%);
+    bottom: 25%;
+    right: 5%;
+    filter: blur(30px);
+    animation: shapeFadeIn 1s ease 0.8s forwards;
 }
 
 .shape-6 {
-    width: 100px;
-    height: 100px;
-    border: 1px solid var(--color-border);
-    background: transparent;
-    top: 50%;
-    left: 5%;
-    border-radius: 50%;
-    animation-delay: 1s;
-    filter: none;
-    animation: shapeFloat 8s ease-in-out infinite, shapeFadeIn 1s ease 1s forwards;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(217, 70, 239, 0.2) 100%);
+    top: 60%;
+    left: 10%;
+    filter: blur(28px);
+    animation: shapeFadeIn 1s ease 1s forwards;
 }
 
 .shape-7 {
+    width: 320px;
+    height: 320px;
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(52, 211, 153, 0.2) 100%);
+    top: 35%;
+    right: -10%;
+    filter: blur(40px);
+    animation: shapeFadeIn 1s ease 1.2s forwards;
+}
+
+.shape-8 {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(248, 113, 113, 0.2) 100%);
+    top: 5%;
+    left: 30%;
+    filter: blur(25px);
+    animation: shapeFadeIn 1s ease 1.4s forwards;
+}
+
+.shape-9 {
     width: 200px;
     height: 200px;
-    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
-    top: 60%;
-    right: -5%;
-    animation-delay: 1.2s;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(129, 140, 248, 0.2) 100%);
+    bottom: 10%;
+    left: 25%;
+    filter: blur(32px);
+    animation: shapeFadeIn 1s ease 1.6s forwards;
+}
+
+.shape-10 {
+    width: 240px;
+    height: 240px;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(244, 114, 182, 0.15) 100%);
+    top: 45%;
+    right: 25%;
+    filter: blur(35px);
+    animation: shapeFadeIn 1s ease 1.8s forwards;
+}
+
+.shape-11 {
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(135deg, rgba(124, 92, 191, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%);
+    top: 40%;
+    left: -140px;
     filter: blur(40px);
+    animation: shapeFadeIn 1s ease 0.5s forwards;
+}
+
+.shape-12 {
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+    top: 50%;
+    left: -40px;
+    filter: blur(38px);
+    animation: shapeFadeIn 1s ease 0.7s forwards;
+}
+
+/* Physics Interactive Shapes */
+.physics-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.physics-shape {
+    position: absolute;
+    background-color: transparent;
+    border: 1px solid rgba(160, 160, 160, 0.25);
+    cursor: grab;
+    user-select: none;
+    box-shadow: 0 0 20px rgba(200, 200, 200, 0.03);
+}
+
+.physics-shape:hover {
+    border-color: rgba(180, 180, 180, 0.4);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.06);
+}
+
+.physics-shape:active {
+    cursor: grabbing;
+}
+
+.physics-shape[data-shape="circle"] {
+    border-radius: 50%;
+}
+
+.physics-shape[data-shape="square"] {
+    border-radius: 22%;
+}
+
+.physics-shape[data-shape="triangle"] {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: rgba(160, 160, 160, 0.25);
+}
+
+.physics-shape[data-shape="triangle"] svg {
+    width: 100%;
+    height: 100%;
+}
+
+.physics-shape[data-shape="triangle"]:hover {
+    color: rgba(180, 180, 180, 0.4);
+}
+
+/* J² Logo - Background watermark */
+.hero-logo-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-primary);
+    font-size: 280px;
+    font-weight: 700;
+    color: rgba(150, 150, 150, 0.06);
+    filter: blur(8px);
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+}
+
+.hero-logo-bg sup {
+    font-size: 0.5em;
+    vertical-align: super;
 }
 
 .grid-pattern {
@@ -545,7 +680,7 @@ button {
 .badge-dot {
     width: 8px;
     height: 8px;
-    background-color: #22c55e;
+    background-color: var(--color-accent);
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
 }
@@ -580,6 +715,10 @@ button {
     font-weight: 400;
 }
 
+[data-theme="light"] .hero-title em {
+    color: var(--color-accent);
+}
+
 .hero-tagline {
     font-size: 1.25rem;
     color: var(--color-text-secondary);
@@ -592,8 +731,8 @@ button {
 .hero-cta {
     display: inline-block;
     padding: 16px 32px;
-    background-color: var(--color-text);
-    color: var(--color-bg);
+    background-color: var(--color-accent);
+    color: #ffffff;
     font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -605,8 +744,9 @@ button {
 }
 
 .hero-cta:hover {
+    background-color: var(--color-accent-hover);
     transform: scale(1.05);
-    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(124, 92, 191, 0.4);
 }
 
 .hero-scroll {
@@ -719,11 +859,17 @@ section {
     font-weight: 400;
 }
 
+[data-theme="light"] .section-title em {
+    color: var(--color-accent);
+}
+
 /* ========================================
    About Section
    ======================================== */
 .about {
     background-color: var(--color-bg-secondary);
+    position: relative;
+    overflow: hidden;
 }
 
 .about-content {
@@ -789,6 +935,11 @@ section {
 /* ========================================
    Work Section
    ======================================== */
+.work {
+    position: relative;
+    overflow: hidden;
+}
+
 .projects-grid {
     display: grid;
     gap: 24px;
@@ -859,6 +1010,8 @@ section {
    ======================================== */
 .services {
     background-color: var(--color-bg-secondary);
+    position: relative;
+    overflow: hidden;
 }
 
 .services-grid {
@@ -987,6 +1140,8 @@ section {
    ======================================== */
 .contact {
     background-color: var(--color-bg-secondary);
+    position: relative;
+    overflow: hidden;
 }
 
 .contact-wrapper {
@@ -1031,11 +1186,11 @@ section {
 }
 
 .contact-item a {
-    transition: opacity 0.3s var(--transition-smooth);
+    transition: color 0.3s var(--transition-smooth);
 }
 
 .contact-item a:hover {
-    opacity: 0.7;
+    color: var(--color-accent);
 }
 
 .contact-form {
@@ -1071,7 +1226,7 @@ section {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--color-text);
+    border-color: var(--color-accent);
 }
 
 .form-group textarea {
@@ -1082,8 +1237,8 @@ section {
 .form-submit {
     align-self: flex-start;
     padding: 16px 40px;
-    background-color: var(--color-text);
-    color: var(--color-bg);
+    background-color: var(--color-accent);
+    color: #ffffff;
     font-size: 0.875rem;
     font-weight: 600;
     border-radius: 100px;
@@ -1091,8 +1246,9 @@ section {
 }
 
 .form-submit:hover {
+    background-color: var(--color-accent-hover);
     transform: scale(1.05);
-    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(124, 92, 191, 0.4);
 }
 
 /* ========================================
@@ -1101,6 +1257,42 @@ section {
 .footer {
     padding: 80px 0 40px;
     border-top: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.footer-blob-1 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+    filter: blur(45px);
+    top: -50px;
+    left: -80px;
+}
+
+.footer-blob-2 {
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.12) 0%, rgba(244, 114, 182, 0.12) 100%);
+    filter: blur(40px);
+    top: 30%;
+    right: -60px;
+}
+
+.footer-blob-3 {
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.12) 0%, rgba(52, 211, 153, 0.12) 100%);
+    filter: blur(45px);
+    bottom: -80px;
+    left: 30%;
 }
 
 .footer-content {
@@ -1159,7 +1351,7 @@ section {
 }
 
 .footer-column a:hover {
-    color: var(--color-text);
+    color: var(--color-accent);
 }
 
 .footer-bottom {
@@ -1190,7 +1382,7 @@ section {
 }
 
 .footer-legal a:hover {
-    color: var(--color-text);
+    color: var(--color-accent);
 }
 
 /* ========================================
