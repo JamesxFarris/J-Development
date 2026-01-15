@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initFormHandling();
     initHeroParallax();
     initPhysicsShapes();
+    initMouseSpotlight();
+    initNumberCounters();
+    initMagneticButtons();
+    init3DCardTilt();
+    initButtonRipple();
 });
 
 /* ========================================
@@ -317,6 +322,23 @@ function initPhysicsShapes() {
 
     const containerRect = container.getBoundingClientRect();
     const floatSpeed = 1.2;
+    const isMobile = window.innerWidth < 1024;
+
+    // On mobile, just position shapes and let CSS handle animation
+    if (isMobile) {
+        const sizes = [70, 65, 60, 55, 75, 50];
+        shapes.forEach((shape, index) => {
+            const size = sizes[index] || 60;
+            const x = 20 + (index * 12) % 60;
+            const y = 15 + (index * 18) % 70;
+
+            shape.style.width = size + 'px';
+            shape.style.height = size + 'px';
+            shape.style.left = x + '%';
+            shape.style.top = y + '%';
+        });
+        return;
+    }
 
     // Initialize physics bodies
     const bodies = [];
@@ -571,4 +593,171 @@ function initPhysicsShapes() {
     }
 
     updatePhysics();
+}
+
+/* ========================================
+   Mouse Spotlight Effect
+   ======================================== */
+function initMouseSpotlight() {
+    const spotlight = document.getElementById('mouseSpotlight');
+    if (!spotlight) return;
+
+    // Only on desktop
+    if (window.innerWidth < 1024) return;
+
+    let mouseX = 0, mouseY = 0;
+    let spotX = 0, spotY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        spotlight.classList.add('active');
+    });
+
+    document.addEventListener('mouseleave', () => {
+        spotlight.classList.remove('active');
+    });
+
+    function animateSpotlight() {
+        spotX += (mouseX - spotX) * 0.1;
+        spotY += (mouseY - spotY) * 0.1;
+
+        spotlight.style.left = spotX + 'px';
+        spotlight.style.top = spotY + 'px';
+
+        requestAnimationFrame(animateSpotlight);
+    }
+
+    animateSpotlight();
+}
+
+/* ========================================
+   Animated Number Counters
+   ======================================== */
+function initNumberCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                animateCounter(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+function animateCounter(element) {
+    const text = element.textContent;
+    const match = text.match(/(\d+)/);
+
+    if (!match) return;
+
+    const target = parseInt(match[0]);
+    const suffix = text.replace(/\d+/, '');
+    const duration = 1500;
+    const start = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(target * easeOut);
+
+        element.textContent = current + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = text;
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+/* ========================================
+   Magnetic Button Effect
+   ======================================== */
+function initMagneticButtons() {
+    const buttons = document.querySelectorAll('.hero-cta, .form-submit');
+
+    // Only on desktop
+    if (window.innerWidth < 1024) return;
+
+    buttons.forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = 'translate(0, 0)';
+        });
+    });
+}
+
+/* ========================================
+   3D Card Tilt Effect
+   ======================================== */
+function init3DCardTilt() {
+    const cards = document.querySelectorAll('.project-card');
+
+    // Only on desktop
+    if (window.innerWidth < 1024) return;
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        });
+    });
+}
+
+/* ========================================
+   Button Ripple Effect
+   ======================================== */
+function initButtonRipple() {
+    const buttons = document.querySelectorAll('.hero-cta, .form-submit');
+
+    buttons.forEach(button => {
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+
+        button.addEventListener('click', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            button.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
 }
