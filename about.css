@@ -1,0 +1,216 @@
+/* ========================================
+   About Page Styles
+   ======================================== */
+
+/* About Hero */
+.about-hero {
+    padding: 160px 0 80px;
+    text-align: center;
+}
+
+.page-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    margin-top: 16px;
+}
+
+.page-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-accent);
+}
+
+/* Our Story Section */
+.our-story {
+    padding: 60px 0 100px;
+}
+
+.our-story::before {
+    display: none;
+}
+
+.story-content {
+    max-width: 800px;
+}
+
+.story-lead {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin-bottom: 24px;
+}
+
+.story-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* Team Section */
+.team-section {
+    padding: 80px 0 120px;
+    background-color: var(--color-bg-secondary);
+}
+
+.team-section::before {
+    display: none;
+}
+
+.team-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+/* Team Member Card */
+.team-member {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .team-member {
+        flex-direction: row;
+        gap: 60px;
+        align-items: flex-start;
+    }
+
+    /* James - Image on LEFT */
+    .member-left {
+        flex-direction: row;
+    }
+
+    /* Jordan - Image on RIGHT */
+    .member-right {
+        flex-direction: row-reverse;
+    }
+}
+
+/* Member Image */
+.member-image {
+    flex-shrink: 0;
+    position: relative;
+}
+
+.image-placeholder {
+    width: 280px;
+    height: 350px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--transition-smooth);
+}
+
+.team-member:hover .image-placeholder img {
+    transform: scale(1.05);
+}
+
+.image-line {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
+}
+
+@media (min-width: 768px) {
+    .member-left .image-line {
+        left: auto;
+        right: -30px;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60px;
+    }
+
+    .member-right .image-line {
+        left: -30px;
+        right: auto;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60px;
+    }
+}
+
+/* Member Info */
+.member-info {
+    flex: 1;
+    max-width: 600px;
+}
+
+.member-name {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.member-role {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+}
+
+.member-bio {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+/* About CTA Section */
+.about-cta {
+    padding: 120px 0;
+    text-align: center;
+}
+
+.about-cta::before {
+    display: none;
+}
+
+.about-cta .section-title {
+    margin-bottom: 16px;
+}
+
+.about-cta p {
+    color: var(--color-text-secondary);
+    margin-bottom: 40px;
+    font-size: 1.125rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .image-placeholder {
+        width: 240px;
+        height: 300px;
+    }
+
+    .member-info {
+        text-align: center;
+    }
+
+    .team-member {
+        padding: 0 20px;
+    }
+}
