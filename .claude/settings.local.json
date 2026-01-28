@@ -12,7 +12,8 @@
       "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd J² Development website\n\n- Modern dark/light theme with toggle\n- Hero section with animated geometric shapes\n- About, Work, Services, FAQ, and Contact sections\n- Placeholder portfolio projects\n- Responsive design with mobile menu\n- Smooth scroll animations\n- SVG favicon\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git push:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nUpdate design and add contact functionality\n\n- Lighten dark mode colors for better contrast\n- Add subtle section separators and accent glows\n- Restructure about stats with vertical line separator\n- Add icons to client satisfaction and support stats\n- Update contact info with new email and phone number\n- Make contact form open default email client\n- Update Instagram link\n- Remove unused social links\n- Default to dark mode\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "WebFetch(domain:jamesxfarris.github.io)"
     ]
   }
 }
